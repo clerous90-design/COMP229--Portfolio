@@ -1,0 +1,202 @@
+/* Global Reset & Base Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f3f7; /* Soft, light lavender-gray background */
+  color: #2b233d;            /* Deep dark purple-gray text for readability */
+  border:#06000c;
+  border-width: 8px;
+  border-style: solid;
+  border-radius: 12px;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- SIDEBAR (Deep Midnight Purple) --- */
+.sidebar {
+  width: 280px;
+  background-color: #1a1025;  /* Deepest tri-tone purple */
+  color: #ffffff;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 4px 0 15px rgba(26, 16, 37, 0.08);
+  text-align: center; /* Center the content in the sidebar */
+}
+
+.profile-area {
+  text-align: center; 
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-img-container {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #7c3aed; /* Mid-tone accent purple ring */
+  margin-bottom: 12px;
+  align-self: center; /* Center the profile image */
+}
+
+
+
+
+
+
+
+.sidebar-divider {
+  border: none;
+  height: 1px;
+  background-color: #3b2a54; /* Subtle dark purple divider */
+  margin: 10px 0 15px 0;
+  
+}
+
+.logo-container {
+  margin-bottom: 10px;
+}
+
+.site-logo {
+  max-width: 250px; /* Adjust this width depending on your logo's shape */
+  height: auto;
+  display: block;
+  border-radius: 30px; /* Optional: Rounded corners for the logo */
+}
+/* Sidebar Navigation Links with Hover Effects */
+.nav-link {
+  color: #d8b4fe;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px; /* Rounded edges for nav items */
+  font-weight: 500;
+  transition: all 0.25s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #7c3aed; /* Vibrant mid-tone purple on hover */
+  color: #ffffff;
+  transform: translateX(4px); /* Subtle slide effect */
+}
+
+/* --- MAIN CONTENT AREA --- */
+.main-content {
+  flex: 1;
+  padding: 60px;
+  max-width: 1000px;
+}
+
+/* Rounded Cards / Squares for Content */
+.page-content {
+  background-color: #ffffff;
+  padding: 45px;
+  border-radius: 16px; /* Soft, modern rounded corners */
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.06); /* Soft purple-tinted shadow */
+  text-align: left;    /* Strictly left-aligned */
+}
+
+.page-content h1, 
+.page-content h2 {
+  color: #2b233d;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.page-content p {
+  color: #4b3e63;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Buttons and Links inside pages */
+.btn-primary {
+  display: inline-block;
+  background-color:transparent;
+  color: #9952e6;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+   border: 2px solid #390e41;
+}
+
+.btn-primary:hover {
+  background-color: #7c3aed; /* Subtle purple fill on hover */
+  color: #ffffff;
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: #9952e6; /* Light purple text */
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 2px solid #390e41; /* Matching purple border */
+}
+
+.btn-secondary:hover {
+  background-color: #7c3aed; /* Subtle purple fill on hover */
+  color: #ffffff;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.project-card {
+  background: #1e1b2e;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #362e59;
+  display: flex;
+  flexDirection: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(88, 28, 135, 0.2);
+}
+
+/* Image container and fitting */
+.project-img-container {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency across all cards */
+  overflow: hidden;
+  background-color: #2a2542;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures screenshots fill the space nicely without severe distortion */
+  object-position: top center; /* Focuses on the top of the screenshot (ideal for app headers/UIs) */
+}
+
+.project-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
