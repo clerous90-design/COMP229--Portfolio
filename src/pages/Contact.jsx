@@ -1,16 +1,16 @@
-
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 function Contact() {
+  // State to handle the success pop-up notification
+  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
 
-  const navigate = useNavigate(); // 2. Initialize the navigate hook
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +23,13 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Optional: You can handle backend message sending logic here later.
+    // 1. Show the success pop-up banner
+    setSubmitted(true);
     
-    // 3. Redirect back to the Home page ('/')
-    navigate('/');
+    // 2. Wait 2 seconds so the user can read the pop-up, then navigate to Home
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
 
   return (
@@ -36,7 +39,24 @@ function Contact() {
         Have a question, a project proposal, or just want to connect? Reach out directly or send a message below!
       </p>
 
-      {/* Your Contact Info Section */}
+      {/* SUCCESS POP-UP BANNER */}
+      {submitted && (
+        <div style={{ 
+          background: 'rgba(34, 197, 94, 0.15)', 
+          border: '1px solid #22c55e', 
+          color: '#4ade80', 
+          padding: '15px 20px', 
+          borderRadius: '10px', 
+          marginBottom: '20px', 
+          maxWidth: '600px',
+          fontWeight: '500',
+          textAlign: 'center'
+        }}>
+          ✨ Message sent successfully! Redirecting you to the Home page...
+        </div>
+      )}
+
+      {/* Direct Contact Info Section */}
       <div className="contact-info-box" style={{ background: '#1e1b2e', padding: '20px 25px', borderRadius: '12px', border: '1px solid #362e59', marginBottom: '30px', maxWidth: '600px' }}>
         <h3 style={{ color: '#fff', marginBottom: '10px', fontSize: '1.1rem' }}>Direct Details</h3>
         <p style={{ color: '#d0c9e8', margin: '6px 0' }}>
@@ -44,10 +64,9 @@ function Contact() {
         </p>
         <p style={{ color: '#d0c9e8', margin: '6px 0' }}>
           <strong>Location:</strong> Ontario, Canada
-          </p>
-
+        </p>
         <p style={{ color: '#d0c9e8', margin: '6px 0' }}>
-          <strong> GitHub:</strong> <a href="https://github.com/clerous90-design" target="_blank" rel="noopener noreferrer" style={{ color: '#9952e6', textDecoration: 'underline' }}>clerous90-design</a>
+          <strong>GitHub:</strong> <a href="https://github.com/clerous90-design" target="_blank" rel="noopener noreferrer" style={{ color: '#9952e6', textDecoration: 'underline' }}>clerous90-design</a>
         </p>
       </div>
 

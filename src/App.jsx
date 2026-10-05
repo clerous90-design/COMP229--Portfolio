@@ -7,7 +7,7 @@ import Education from './pages/Education';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 
-import './App.css'; // Import our new professional stylesheet
+import './App.css';
 
 function App() {
   return (
