@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./AuthPages.css";
+import "./Authpages.css";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:3000";
 
