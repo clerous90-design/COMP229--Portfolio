@@ -22,20 +22,28 @@ exports.findOne = async (req, res) => {
 };
 
 // Add new contact
+// Add new contact
 exports.create = async (req, res) => {
   try {
+    const fullName = (req.body.name || "").trim();
+    const nameParts = fullName ? fullName.split(/\s+/) : [];
+    const firstname = req.body.firstname || nameParts[0] || "";
+    const lastname = req.body.lastname || nameParts.slice(1).join(" ") || "";
+
     const contact = new Contact({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email
+      name: fullName || `${firstname} ${lastname}`.trim(),
+      firstname,
+      lastname,
+      email: req.body.email,
+      message: req.body.message
     });
+
     const savedContact = await contact.save();
-    res.json(savedContact);
+    res.status(201).json(savedContact);
   } catch (err) {
     res.status(500).json({ message: err.message || "Some error occurred while creating the contact." });
   }
 };
-
 // Update contact by id
 exports.update = async (req, res) => {
   try {

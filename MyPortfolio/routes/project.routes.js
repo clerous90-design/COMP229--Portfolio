@@ -1,16 +1,28 @@
-const controller = require('../controllers/project.controller');
-const verifyJWT = require('../middlewares/auth.middleware');
+const express = require("express");
+const router = express.Router();
+const controller = require("../controllers/project.controller");
+const { verifyJWT, isAdmin } = require("../middlewares/auth.middleware");
 
-module.exports = function(app) {
-  app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
-  });
+router.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Authorization, Origin, Content-Type, Accept"
+  );
+  next();
+});
 
-  // Protected project routes
-  app.get('/api/projects', verifyJWT, controller.findAll);
-  app.post('/api/projects', verifyJWT, controller.create);
-};
+// Public read so visitors & Users can view projects
+router.get("/", controller.findAll);
+
+// Admin-only write routes
+router.post("/", verifyJWT, isAdmin, controller.create);
+
+if (controller.update) {
+  router.put("/:id", verifyJWT, isAdmin, controller.update);
+}
+
+if (controller.delete) {
+  router.delete("/:id", verifyJWT, isAdmin, controller.delete);
+}
+
+module.exports = router;

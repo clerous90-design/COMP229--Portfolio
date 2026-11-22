@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -7,7 +8,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  credentials: true
+}));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/Portfolio')
@@ -35,6 +39,8 @@ app.use('/api/qualifications', qualificationRoutes);
 
 const userRoutes = require('./routes/user.routes');
 app.use('/api/users', userRoutes);
+
+require('./routes/auth.routes')(app);
 
 
 // Port configuration & Server Start (Explicitly bound to 127.0.0.1)

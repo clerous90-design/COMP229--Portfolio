@@ -23,14 +23,16 @@ exports.create = async (req, res) => {
   try {
     const qualification = new Qualification({
       title: req.body.title,
+      institution: req.body.institution,
+      year: req.body.year,
+      completion: req.body.completion,
+      description: req.body.description,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      email: req.body.email,
-      completion: req.body.completion,
-      description: req.body.description
+      email: req.body.email
     });
     const savedQualification = await qualification.save();
-    res.json(savedQualification);
+    res.status(201).json(savedQualification);
   } catch (err) {
     res.status(500).json({ message: err.message || "Error creating qualification." });
   }

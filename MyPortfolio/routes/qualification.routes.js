@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const qualifications = require('../controllers/qualification.controller');
-const verifyJWT = require('../middlewares/auth.middleware');
+const { verifyJWT, isAdmin } = require('../middlewares/auth.middleware');
 
-router.get('/', verifyJWT, qualifications.findAll);
-router.get('/:id', verifyJWT, qualifications.findOne);
-router.post('/', verifyJWT, qualifications.create);
-router.put('/:id', verifyJWT, qualifications.update);
-router.delete('/:id', verifyJWT, qualifications.delete);
-router.delete('/', qualifications.deleteAll);
+// Public read routes
+router.get('/', qualifications.findAll);
+router.get('/:id', qualifications.findOne);
+
+// Admin-only write/delete routes
+router.post('/', verifyJWT, isAdmin, qualifications.create);
+router.put('/:id', verifyJWT, isAdmin, qualifications.update);
+router.delete('/:id', verifyJWT, isAdmin, qualifications.delete);
+router.delete('/', verifyJWT, isAdmin, qualifications.deleteAll);
 
 module.exports = router;
